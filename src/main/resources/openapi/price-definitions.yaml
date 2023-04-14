@@ -1,0 +1,120 @@
+openapi: 3.0.1
+info:
+    title: Test backend service REST API
+    description: Price API
+    version: 0.0.1
+
+servers:
+    - url: http://localhost:8081
+      description: Generated server url
+
+tags:
+    - name: Price
+      description: The price API
+
+
+security:
+    - bearerAuth: []
+
+paths:
+    /prices:
+
+        get:
+            tags:
+                - Tracking
+            summary: Get information price by productId, brandId and date.
+            operationId: getPrice
+            parameters:
+                -   name: brandId
+                    in: query
+                    description: Brand Id
+                    required: true
+                    schema:
+                        type: integer
+                        format: int64
+                    example: 1
+                -   name: productId
+                    in: query
+                    description: Product Id
+                    required: true
+                    schema:
+                        type: integer
+                        format: int64
+                    example: 35455                    
+                -   name: date
+                    description: "datetime format: yyyy-MM-dd-HH.mm.ss  Example: 2020-06-14-12.30.00"
+                    in: query
+                    required: true
+                    schema:
+                        type: string
+                    example: 2020-06-14-00.00.00
+
+            responses:
+                "200":
+                    description: successful operation
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PriceResponse'
+                "204":
+                    description: Empty results.
+                "400":
+                    description: Bad input parameters.
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+
+
+
+components:
+    schemas:
+
+        PriceResponse:
+            description: Price of a product in a brand between certain dates
+            type: object
+            properties:
+                brandId:
+                    description: Foreign key of the group string
+                    type: integer
+                    format: int64
+                    example: 1
+                productId:
+                    description: Product id
+                    type: integer
+                    format: int64
+                    example: 35455
+                price:
+                    description: Price
+                    type: number
+                    example: 35.50
+                startDate:
+                    description: Start date range in which the indicated rate price applies
+                    type: string
+                    example: 2020-06-14-00.00.00   
+                endDate:
+                    description: End date range in which the indicated rate price applies
+                    type: string
+                    example: 2020-12-31-23.59.59       
+
+     
+
+        Error:
+            description: error info
+            required:
+                - timestamp
+            type: object
+            properties:
+                timestamp:
+                    type: string
+                    format: date-time
+                    example: "1975-07-05T07:30:00Z"
+                status:
+                    type: integer
+                    format: int32
+                error:
+                    type: string
+                message:
+                    type: string
+                path:
+                    type: string

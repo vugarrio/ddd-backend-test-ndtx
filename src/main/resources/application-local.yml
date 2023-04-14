@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    activate:
+      on-profile: "local"
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+  h2:
+    console.enabled: true
+
+
+logging:
+  level:
+    com.vugarrio.backendTest: DEBUG

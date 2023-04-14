@@ -1,0 +1,22 @@
+
+spring:
+  profiles:
+    active: local
+
+  application:
+    name: backendTest-${spring.profiles.active}
+
+
+  springdoc:
+    version: '@springdoc.version@'
+    swagger-ui:
+      use-root-path: true
+
+
+info:
+  app:
+    name: "@project.name@"
+    version: "@project.version@"
+    encoding: "@project.build.sourceEncoding@"
+    java:
+      version: "@java.version@"
