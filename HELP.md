@@ -1,6 +1,5 @@
 # BackendTest Application
 
-
 ### Technological stack
 * Spring Boot 2.7.10, Maven
 * Java 11
