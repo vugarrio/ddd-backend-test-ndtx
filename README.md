@@ -6,7 +6,7 @@
 * DDD and Hexagonal Arquitecture
 * Testing: Junit5, Mockito
 * Database: H2, Spring Data JPA
-* Swagger (Api Firs with OpenApi Generator)
+* Swagger (Api First with OpenApi Generator)
 
 
 ### Run the microservice:
