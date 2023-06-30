@@ -40,5 +40,39 @@ http://localhost:8080/h2-console
 - Password: 
 
 
+### Hexagonal architecture and DDD:
+
+![proyect](./doc/proyect.png)
+
+```bash
+    1) Capa de Domain:
+      La estructura de los paquetes de la capa de dominio:
+         - Definición de las entidades de dominio
+         - repository: Declaración de las interfaces (puertos) de la parte de persistencia
+         - usecases: Declaración de las interfaces (puertos) de todos los casos de uso del dominio
+         - exceptions: Declaración del as excepciones necesarias:
+
+      Observaciones:
+         Generalmente se podría poner todas las declaraciones de los puertos en el 
+         mismo paquete, ejemplo ports.
+         La experiencia y a efectos prácticos y para simplificar el entendimiento de la estructura, mejor siempre
+         separar los puertos en paquetes lógicos que indican el comportamiento esperado.
+```
+
+```bash
+    2) Capa de Application:
+        Aquí es donde se hace toda la implementación de la lógica de negocio:
+        - Se implementan las interfaces declaradas en la capa de dominio en el paquete usecases.
+        - Se hace uso del resto de los puertos para cumplir la lógica de negocio esperada.
+        - Es recomendable no usar @Service u otra anotación que dependa del framework base
+```
 
 
+```bash
+    3) Capa de Infrastructure:
+        Es donde se implementan los adaptadores de salida, previamente declarados como 
+        interfaces (puertos) en la capa de dominio.
+        Es mejor siempre separar los adaptadores en paquetes diferentes por contexto técnico, 
+        porque a largo plazo nos puede servir para tener configuraciones comunes.
+
+```
